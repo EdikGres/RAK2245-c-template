@@ -1,6 +1,6 @@
 APP_NAME := sx1301
 
-LGW_PATH ?= libloragw
+LGW_PATH ?= loragw/libloragw
 
 
 ARCH = arm
@@ -32,13 +32,13 @@ all: $(APP_NAME)
 clean: 
 	rm -f $(OBJDIR)/*.o
 	rm -f $(APP_NAME)
-	$(MAKE) clean -e -C libloragw
+	$(MAKE) clean -e -C $(LGW_PATH)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)/$(APP_NAME).o: src/$(APP_NAME).c | $(OBJDIR)
-	$(MAKE) all -e -C libloragw
+	$(MAKE) all -e -C $(LGW_PATH)
 	$(CC) -c $(CFLAGS) -I$(LGW_PATH)/inc $< -o $@
 	
 
